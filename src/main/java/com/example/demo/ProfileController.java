@@ -9,11 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/profile")
 public class ProfileController {
 
-    @Value("${app.message}")
-    private String message;
+    @Value("${app.name}")
+    private String appName;
 
-    @GetMapping
-    public String getMessage() {
-        return message;
+    @GetMapping("/appName")
+    public String getAppName() {
+        return appName;
     }
+}
+
+@Autowired
+private AppConfig appConfig;
+
+@GetMapping("/config")
+public String getConfig() {
+    return "Title: " + appConfig.getTitle() + ", Version: " + appConfig.getVersion();
 }
